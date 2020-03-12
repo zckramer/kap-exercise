@@ -2,14 +2,25 @@ import React from 'react';
 import Link from '../Link/Link';
 import HTML from '../HTML/HTML';
 
-const profile = (props) => {
+const BASE_URL = "https://financialmodelingprep.com/api/v3/company/profile/AAPL"
 
+const profile = (props) => {
+    let data;
+    function getProfile () {
+        fetch({BASE_URL})
+        .then(res => res.json())
+        .then(company => {
+            data = company
+            console.log(data);
+        })
+    }
+    getProfile();
     return (
         <div className="Profile">
             <p>Company Name : {props.name}</p>
             <p>+/- : {props.data}</p>
             <p>Current Price : {props.price}</p>
-            <p>Website : </p>
+            <p>Website : {Link(`${props.website}`, `Apple Website`)}</p>
         </div>
     )
 }
