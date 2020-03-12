@@ -1,30 +1,99 @@
 import React from 'react';
 import Link from '../Link/Link';
-import HTML from '../HTML/HTML';
+import axios from 'axios';
 
 const BASE_URL = "https://financialmodelingprep.com/api/v3/company/profile/AAPL"
 
-const profile = (props) => {
-    let data;
-    function getProfile () {
-        fetch({BASE_URL})
-        .then(res => res.json())
-        .then(company => {
-            data = company
-            console.log(data);
-        })
+class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            company: []
+        }
     }
-    getProfile();
-    return (
-        <div className="Profile">
-            <p>Company Name : {props.name}</p>
-            <p>+/- : {props.data}</p>
-            <p>Current Price : {props.price}</p>
-            <p>Website : {Link(`${props.website}`, `Apple Website`)}</p>
-        </div>
-    )
+
+    componentDidMount() {
+        axios.get(BASE_URL)
+        .then( response => {
+            console.log( response );
+            this.setState({company: response.data});
+        })
+    //     fetch(BASE_URL)
+    //         .then(res => res.json())
+    //         .then(
+    //             (result) => {
+    //                 console.log(result)
+    //                 this.setState({company: result.data})
+    //                 // this.setState({
+    //                 //     isLoaded: true,
+    //                 //     items: result.items
+    //                 // })
+    //         })
+    // }
+    }
+
+    render() {
+        const company = this.state.company.map(profile => {
+            return <Profile name={profile.name} website={profile.website} data={profile.data} price={profile.price}/>;
+        }
+
+        );
+
+        return (
+            <div className="Profile">
+                {company}
+                <p>Company Name : {Link(company.website, company.name)}</p>
+                <p>+/- : {company.data}</p>
+                <p>Current Price : {company.price}</p>
+            </div>
+        )
+    // const { error, isLoaded } = this.state;
+        // const { company } = this.state.company.map( result => {
+        //     return <Profile />;
+
+        // }
+        // );
+        // if (error) {
+        // return <div>Error: {error.message}</div>;
+        // } else if (!isLoaded){
+        //     return <div>Loading...</div>;
+        // } else {
+        //     return (
+        //         <div className="Profile">
+        //             {company}
+        //             <p>Company Name : {Link(company.website, company.name)}</p>
+        //             <p>+/- : {company.data}</p>
+        //             <p>Current Price : {company.price}</p>
+        //         </div>
+        //     )
+        // }
+    }
 }
-export default profile;
+
+export default Profile;
+
+// const profile = (props) => {
+//     let data;
+//     function getProfile () {
+//         fetch({BASE_URL})
+//         .then(res => res.json())
+//         .then(company => {
+//             data = company
+//             console.log(data);
+//         })
+//     }
+//     getProfile();
+//     return (
+//         <div className="Profile">
+//             <p>Company Name : Link(${props.website}, ${props.name})</p>
+//             <p>+/- : {props.data}</p>
+//             <p>Current Price : {props.price}</p>
+//         </div>
+//     )
+// }
+// export default profile;
 
 // function SingleRecipe (props) {
 //     const [fetchResponse, setFetchResponse] = useState({});
