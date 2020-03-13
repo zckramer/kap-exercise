@@ -9,8 +9,8 @@ class Card extends Component {
         company: []
     }
 
-    componentDidMount () {
-        axios.get (BASE_URL)
+    componentDidMount () {  // I still need to learn more about React components lifecycles
+        axios.get (BASE_URL) // I only read to use this one after it is rendered, which gave me trouble.
             .then( response => {
                 this.setState({ company: response.data.profile });
                 console.log(response.data.profile)
@@ -20,7 +20,7 @@ class Card extends Component {
     render() {
         const company = this.state.company
 
-        const linkStylePos = {
+        const linkStylePos = {  // Kept styling ultra simple, no need for a CSS file
             color: 'green'
         }
         const linkStyleNeg = {
@@ -31,9 +31,9 @@ class Card extends Component {
         const parsedChange = (
             <div>
                 {
-                num < 0 ? 
-                <span style={linkStyleNeg}>{num}</span> :
-                <span style={linkStylePos}>{num}</span> 
+                    num < 0 ? 
+                    <span style={linkStyleNeg}>{num}</span> :
+                    <span style={linkStylePos}>{num}</span> 
                 }
             </div>
         )
