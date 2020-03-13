@@ -19,11 +19,29 @@ class Card extends Component {
 
     render() {
         const company = this.state.company
-        
+
+        const linkStylePos = {
+            color: 'green'
+        }
+        const linkStyleNeg = {
+            color: 'red'
+        }
+
+        const num = parseFloat(company.changes);
+        const parsedChange = (
+            <div>
+                {
+                num < 0 ? 
+                <span style={linkStyleNeg}>{num}</span> :
+                <span style={linkStylePos}>{num}</span> 
+                }
+            </div>
+        )
+
         return (
             <div className="Card">
                 <li><span>Company Name : {Link(company.website, company.companyName)}</span></li>
-                <li><span>Changes by % : {company.changesPercentage}</span></li>
+                <li><span>Changes by % : {!parsedChange ? "Loading..." : parsedChange}</span></li>
                 <li><span>Price : ${company.price}</span></li>
             </div>
         )
