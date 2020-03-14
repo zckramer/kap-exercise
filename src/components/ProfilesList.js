@@ -7,9 +7,10 @@ const BASE_URL = 'https://financialmodelingprep.com/api/v3/company/profile/'
 class ProfilesList extends Component {
     state = {
         userInput: [],
-        companyData: []
+        companyData: [],
+        shouldDisplayCard: false
     }
-
+    
     handleChange = (e) => {
         this.setState({
             userInput: e.target.value
@@ -21,9 +22,9 @@ class ProfilesList extends Component {
         this.setState({userInput: e.target.value})
             axios.get(BASE_URL + this.state.userInput)
             .then(res => {
-                this.setState({companyData: res})
-                console.log(this.state.companyData)
+                this.setState({companyData: res.data})
             })
+            .then(this.setState({shouldDisplayCard:true}))
     }
     
     render () {
@@ -31,22 +32,26 @@ class ProfilesList extends Component {
         const Input = <input
                         placeholder='symbol'
                         value={this.state.userInput}
-                        onChange={e => this.handleChange(e)}/>
+                        onChange={e => this.handleChange(e)}
+                        />
         
-        const company = this.state.companyData;                
         return (
+            
             <div>
                 <form>
                     {Input}
                     {Button}
                 </form>
                 <main className="CardContainer">
-                    <Card 
-                    symbol={company.symbol} 
-                    companyName={company.companyName}
-                    website={company.website}
                     
-                    />
+                    {this.state.shouldDisplayCard ? 
+                        <Card 
+                        shouldDisplayCard={this.state.shouldDisplayCard}
+                        symbol={this.state.companyData.symbol} 
+                        data={this.state.companyData}
+                        
+                        /> : <p>Type a company's symbol to get their info</p>
+                    }
                 </main>
             </div>
         )

@@ -1,84 +1,36 @@
 import React from 'react';
 import Link from './Link';
-// import axios from 'axios';
 
-// const BASE_URL = "https://financialmodelingprep.com/api/v3/company/profile/AAPL"
-
-const card = (props) => {
-
-    const linkStylePos = {  // Kept styling ultra simple, no need for a CSS file
+const card = props => {
+    // console.log(props.data.profile)
+    const linkStylePos = {
         color: 'green'
     }
     const linkStyleNeg = {
         color: 'red'
     }
-
-    const num = parseFloat(props.change);
-    const parsedChange = (
-        <div>
+    
+    function handleParsedChanges() {
+        const num = parseFloat(props.data.profile.changes);
+        const parsedChange = (
+            <div>
             {
                 num < 0 ? 
                 <span style={linkStyleNeg}>{num}</span> :
                 <span style={linkStylePos}>{num}</span> 
             }
-        </div>
-    )
+            </div>
+        )
+        return parsedChange;
+    }
 
     return (
         <div className="Card" >
-            <li><span>Company Name : {Link(props.website, props.companyName)}</span></li>
-            {/* <li><span>Change : {!parsedChange ? "Loading..." : parsedChange}</span></li> */}
-            <li><span>Price : ${props.price}</span></li>
+            <li><span>Company Name : {props.data.profile ? Link(props.data.profile.website, props.data.profile.companyName) : 'Loading' }</span></li>
+            <li><span>Change : {props.data.profile ? handleParsedChanges() : <div>Loading</div>}</span></li>
+            <li><span>Price : ${props.data.profile  ? props.data.profile.price : `Loading` }</span></li>
+            <li><span>Symbol : {props.symbol}</span></li>
         </div>
     )
 };
 export default card;
-
-// class Card extends Component {
-//     state = {
-//         company: [this.props]
-//     }
-
-//     // componentDidMount () {  // I still need to learn more about React components lifecycles
-//     //     // axios.get (BASE_URL) // I only read to use this one after it is rendered, which gave me trouble.
-//     //     //     .then( response => {
-//     //     //         this.setState({ company: response.data.profile });
-//     //     //         // console.log(response.data.profile)
-//     //     //     })
-//     // }
-
-
-//     render() {
-//         const company = this.state.company
-
-//         const linkStylePos = {  // Kept styling ultra simple, no need for a CSS file
-//             color: 'green'
-//         }
-//         const linkStyleNeg = {
-//             color: 'red'
-//         }
-
-//         const num = parseFloat(this.props.change);
-//         const parsedChange = (
-//             <div>
-//                 {
-//                     num < 0 ? 
-//                     <span style={linkStyleNeg}>{num}</span> :
-//                     <span style={linkStylePos}>{num}</span> 
-//                 }
-//             </div>
-//         )
-
-//         return (
-//             <div className="Card" >
-//                 <li><span>Company Name : {Link(this.props.website, this.props.companyName)}</span></li>
-//                 <li><span>Change : {!parsedChange ? "Loading..." : parsedChange}</span></li>
-//                 <li><span>Price : ${this.props.price}</span></li>
-//             </div>
-//         )
-
-//     }
-
-// }
-
-// export default Card;
