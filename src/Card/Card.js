@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Link from '../Link/Link';
 import axios from 'axios';
+import CardLabels from '../CardLabels/CardLabels'
 
 const BASE_URL = "https://financialmodelingprep.com/api/v3/company/profile/AAPL"
 
@@ -40,11 +41,15 @@ class Card extends Component {
 
         return (
             <div className="Card">
-                <li><span>Company Name : {Link(company.website, company.companyName)}</span></li>
-                <li><span>Changes by % : {!parsedChange ? "Loading..." : parsedChange}</span></li>
-                <li><span>Price : ${company.price}</span></li>
+                <ul className="Card__Data">
+                    <li><span>Company Name : {Link(company.website, company.companyName)}</span></li>
+                    <li><span>Changes by % : {!parsedChange ? "Loading..." : parsedChange}</span></li>
+                    <li><span>Price : ${company.price}</span></li>
+                    <li><span>Symbol : {company.symbol}</span></li>
+
+                </ul>
             </div>
-        )
+                    )
 
     }
 
