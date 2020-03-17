@@ -38,16 +38,17 @@
 
 .Card__Labels {
   justify-content: left;
-  margin: 5rem;
+  margin: 2rem;
 }
 
 .Card__Data {
   justify-content: right;
-  margin: 5rem;
+  margin: 2rem;
 }
 
 html {
   background-color: whitesmoke;
+  font-size: 1.75rem;
 }
 
 hr {
