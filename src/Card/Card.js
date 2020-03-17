@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Link from '../Link/Link';
 import axios from 'axios';
 import CardLabels from '../CardLabels/CardLabels'
 import CardData from '../CardData/CardData'
