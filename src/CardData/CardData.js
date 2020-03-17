@@ -7,6 +7,7 @@ function CardData(props) {
 			<li>
 				<span>{Link(props.website, props.companyName)}</span>
 			</li>
+			<hr />
 			<li>
                 <span 
                 style={props.changesPercent && props.changesPercent.includes("-") ? 
@@ -14,9 +15,11 @@ function CardData(props) {
                 {props.changesPercent}
                 </span>
 			</li>
+			<hr />
 			<li>
 				<span>{props.price}</span>
 			</li>
+			<hr />
 			<li>
 				<span>{props.symbol}</span>
 			</li>

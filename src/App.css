@@ -28,6 +28,39 @@
   color: #61dafb;
 }
 
+.Card {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem;
+  border: 3px solid cornflowerblue;
+  border-radius: 8px;
+}
+
+.Card__Labels {
+  justify-content: left;
+  margin: 5rem;
+}
+
+.Card__Data {
+  justify-content: right;
+  margin: 5rem;
+}
+
+html {
+  background-color: whitesmoke;
+}
+
+hr {
+  color: cornflowerblue;
+}
+
+li {
+  list-style: none;
+  font-weight: bold;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
