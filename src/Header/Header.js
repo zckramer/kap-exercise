@@ -14,28 +14,20 @@ class Header extends Component {
         this.setState({
             userInput: e.target.value
         })
-        console.log(this.state.userInput)
+        console.log(e.target.value)
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state.userInput)
         axios.get ( BASE_URL + this.state.userInput )
         .then( response => {
+            this.setState({ showCard: false })
+            this.setState({ company: [] })
             this.setState({ company: response.data.profile });
             this.setState({ showCard: true })
             console.log(this.state.showCard)
-
         })
     }
-
-    // componentDidMount () { 
-    //     axios.get (BASE_URL) 
-    //         .then( response => {
-    //             this.setState({ company: response.data.profile });
-    //             console.log(this.state.company)
-    //         })
-    // }
 
     render() {
         return (
@@ -45,7 +37,6 @@ class Header extends Component {
                     Ticker Symbol:
                     <input
                         type="text" 
-                        // userInput='userInput'
                         value={this.state.userInput}
                         onChange={e => this.handleChange(e)}
                         ref={(input) => {this.input = input;}} />

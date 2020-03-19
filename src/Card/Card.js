@@ -26,25 +26,26 @@ class Card extends Component {
         return (
             <div className="Card">
                 <CardLabels />
-                {/* {console.log(company.companyName)}
-                {console.log(company.website)}
-                {console.log(company.price)} */}
                 <CardData 
                     companyName={company.companyName}
                     website={company.website}
+                    ceo={company.ceo}
+                    description={company.description}
+                    changes={company.changes}
                     changesPercent={company.changesPercentage}
                     price={company.price}
+                    mktCap={company.mktCap}
+                    range={company.range}
+                    lastDiv={company.lastDiv}
+                    industry={company.industry}
+                    exchange={company.exchange}
+                    sector={company.sector}
+                    beta={company.beta}
+                    volAvg={company.volAvg}
                     symbol={symbol}
                 />
-                {/* <ul className="Card__Data">
-                    <li><span>Company Name : {Link(company.website, company.companyName)}</span></li>
-                    <li><span>Changes by % : {!parsedChange ? "Loading..." : parsedChange}</span></li>
-                    <li><span>Price : ${company.price}</span></li>
-                    <li><span>Symbol : {company.symbol}</span></li>
-
-                </ul> */}
             </div>
-                    )
+        )
 
     }
 }
