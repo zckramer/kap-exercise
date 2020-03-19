@@ -34,6 +34,7 @@ class Header extends Component {
             if (response.data.profile === undefined) {
                 this.setState({ hasError: true })
             } else {
+                this.setState({ hasError: false })
                 this.setState({ showCard: true })
                 console.log(this.state.showCard)
             }
