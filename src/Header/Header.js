@@ -6,10 +6,17 @@ const BASE_URL = "https://financialmodelingprep.com/api/v3/company/profile/"
 class Header extends Component {
     state = {
         company: [],
+        hasError: false,
         userInput: '',
         showCard: false
     }
     
+    componentDidCatch(error, info) {
+        this.setState({ hasError: true })
+        this.setState({ showCard: false })
+        console.log("Caught an error")
+    }
+
     handleChange = (e) => {
         this.setState({
             userInput: e.target.value
@@ -24,8 +31,12 @@ class Header extends Component {
             this.setState({ showCard: false })
             this.setState({ company: [] })
             this.setState({ company: response.data.profile });
-            this.setState({ showCard: true })
-            console.log(this.state.showCard)
+            if (response.data.profile === undefined) {
+                this.setState({ hasError: true })
+            } else {
+                this.setState({ showCard: true })
+                console.log(this.state.showCard)
+            }
         })
     }
 
@@ -43,6 +54,7 @@ class Header extends Component {
                 </label>
                 <button onClick={(e) => this.onSubmit(e)}>Send</button>         
             </form>
+            {this.state.hasError ? <span>Can not find a company related to the symbol entered... </span> : ""}
             {this.state.showCard===true ? <Card userInput={this.state.userInput}/> : 'Enter a company ticker symbol to get info'}
             </div>
         );
