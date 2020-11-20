@@ -21,12 +21,12 @@ class Header extends Component {
         this.setState({
             userInput: e.target.value
         })
-        console.log(e.target.value)
+        // console.log(e.target.value)
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        axios.get ( BASE_URL + this.state.userInput )
+        axios.get ( BASE_URL + this.state.userInput + "?apikey=" + "f3cadaf0569807e5dd47e435a6d8c5a6" )
         .then( response => {
             this.setState({ showCard: false })
             this.setState({ company: [] })
